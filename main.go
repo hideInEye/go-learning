@@ -5,22 +5,35 @@ import (
 )
 
 type Foo struct {
-	name string
+	name string `json:"name"`
 }
 
 func PointerMethod(f *Foo) {
-	fmt.Println("pointer method on",f.name)
+	fmt.Println("pointer method on", f.name)
 }
 
-func ValueMethod (f Foo) {
-	fmt.Println("value method on",f.name)
+func ValueMethod(f Foo) {
+	fmt.Println("value method on", f.name)
 }
 
-func NewFoo()Foo{
-	return Foo{name:"right value struct"}
+func NewFoo() Foo {
+	return Foo{name: "right value struct"}
+}
+
+func f1() int {
+	x := 5
+	defer func() { x++ }()
+	return x
+}
+
+func f2() (x int) {
+	defer func() { x++ }()
+	return 5
 }
 
 func main() {
+	fmt.Println(f1())
+	fmt.Println(f2())
 	// 数组字符串储存
 	//name := [...]string{"吴佩","alex"}
 	//fmt.Printf("数组的内存地址:%p \n",&name)
@@ -32,7 +45,6 @@ func main() {
 	//ValueMethod(f3)
 	//f2 := &Foo{name:"pointer struct"}
 	//PointerMethod(f2)
-
 
 	// 在切片不执行扩容的时候
 	//user := make([]int,3,7)
@@ -92,12 +104,15 @@ func main() {
 	//	fmt.Println(index,value)
 	//}
 
-
 	// map 理解
 	// 初始化
 	// userInfo :=map[string]string{}
-	//userinfo := map[string]string{"name":"sad","age":"22"}
-	//fmt.Println(userinfo["name"])
+	//userinfo := map[string]string{"name": "sad", "age": "22"}
+	//info := Foo{
+	//	name: "1123",
+	//}
+	//userInfo := []Foo{info}
+	//fmt.Println(userInfo)
 	//userinfo["age"]="20"
 	//userinfo["email"] = "123@123.com"
 	//fmt.Println(userinfo)
@@ -148,8 +163,14 @@ func main() {
 	//	fmt.Println(value)
 	//}
 
+	//number := decimal.NewFromFloat(2021.556368).Round(2)
+	//fmt.Printf("number:%s", number)
 
-
+	//number := 5
+	//for number < 10 {
+	//	defer fmt.Printf("defer:%d\n", number)
+	//	fmt.Printf(" number: %d\n", number)
+	//	number++
+	//}
 
 }
-
